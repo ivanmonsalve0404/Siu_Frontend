@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { RuteoPrincipal } from './routes/RuteoPrincipal';
+
+const cargarComponente = () => {
+
+  return (
+    <div className='d-flex justify-content-center'>
+      <div className="mt-3">
+        <span className='spinner-grow spinner-grow-sm fs-4 fw-bold text-danger'></span>
+        <br />
+        <span className='text-center fst-italic fs-3 text-danger'>Cargando ...</span>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ToastContainer />
+      <Suspense fallback={cargarComponente()}>
+        <RuteoPrincipal />
+      </Suspense>
+    </BrowserRouter>
+
   );
 }
 
